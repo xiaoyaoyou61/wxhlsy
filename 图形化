@@ -1,0 +1,22 @@
+#图形化模型代码化
+% 创建新的Simulink模型
+new_system('my_simulink_model');
+ 
+% 添加正弦波发生器模块
+add_block('simulink/Sources/Sine Wave', 'my_simulink_model/SineWave');
+ 
+% 添加增益模块
+add_block('simulink/Math Operations/Gain', 'my_simulink_model/Gain');
+ 
+% 设置增益模块的参数
+set_param('my_simulink_model/Gain', 'Gain', '2');
+ 
+% 添加示波器模块
+add_block('simulink/Sinks/Scope', 'my_simulink_model/Scope');
+ 
+% 连接模块
+add_line('my_simulink_model', 'SineWave/1', 'Gain/1');
+add_line('my_simulink_model', 'Gain/1', 'Scope/1');
+ 
+% 打开模型
+open_system('my_simulink_model');
